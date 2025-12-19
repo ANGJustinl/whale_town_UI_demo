@@ -1,0 +1,892 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/": {
+            "get": {
+                "operationId": "AppController_getStatus",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "App"
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "\u93c0\udcaf\u93b8\u4f7a\u6564\u93b4\u5cf0\u6095\u9286\u4f80\u5056\u7ee0\u8fa8\u57a8\u93b5\u5b2b\u6e80\u9359\u98ce\u6ae5\u8930\udc95",
+                "operationId": "LoginController_login",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u9427\u8bf2\u7d8d\u93b4\u612c\u59db",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf"
+                    },
+                    "401": {
+                        "description": "\u9422\u3126\u57db\u935a\u5d86\u57a8\u7035\u55d9\u721c\u95bf\u6b12\udcaf\udcaf"
+                    }
+                },
+                "summary": "\u9422\u3126\u57db\u9427\u8bf2\u7d8d",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "\u9352\u6d98\u7f13\u93c2\u626e\u6564\u93b4\u75af\u5904\u93b4\u67ab\udc80\u509a\udca6\u509b\u7049\u93bb\u612a\u7df5\u95ad\udcae\u7ee0\u618b\u7d1d\u95c7\udc80\u7455\u4f78\u539b\u748b\u51aa\u6564\u9359\u6226\udc80\u4f80\u7359\u7487\u4f7a\u721c\u93ba\u30e5\u5f5b\u947e\u5cf0\u5f47\u6960\u5c83\u7609\u942e\u4f8a\u7d1d\u9412\u8dfa\u6097\u9366\u3126\u655e\u9350\u5c7e\u6902\u93bb\u612a\u7df5\u6960\u5c83\u7609\u942e\u4f7d\u7e58\u741b\u5c84\u7359\u7487\u4f75\udc80\udc82",
+                "operationId": "LoginController_register",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "\u5a09\u3125\u553d\u93b4\u612c\u59db",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf"
+                    },
+                    "409": {
+                        "description": "\u9422\u3126\u57db\u935a\u5d86\u57a8\u95ad\udcae\u7ee0\u535e\u51e1\u701b\u6a3a\u6e6a"
+                    }
+                },
+                "summary": "\u9422\u3126\u57db\u5a09\u3125\u553d",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/github": {
+            "post": {
+                "description": "\u6d63\u8de8\u6564GitHub\u7490\ufe3d\u57db\u9427\u8bf2\u7d8d\u93b4\u6828\u655e\u9350\udc8c",
+                "operationId": "LoginController_githubOAuth",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GitHubOAuthDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "GitHub\u9427\u8bf2\u7d8d\u93b4\u612c\u59db",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GitHubOAuthResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf"
+                    },
+                    "401": {
+                        "description": "GitHub\u7481\u3088\u7609\u6fb6\u8fab\u89e6"
+                    }
+                },
+                "summary": "GitHub OAuth\u9427\u8bf2\u7d8d",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/forgot-password": {
+            "post": {
+                "description": "\u935a\u6220\u6564\u93b4\u70fd\u5056\u7ee0\u8fa8\u57a8\u93b5\u5b2b\u6e80\u9359\u6226\udc80\u4f78\u7611\u942e\u4f80\u5678\u7f03\udcae\u6960\u5c83\u7609\u942e\udc81",
+                "operationId": "LoginController_forgotPassword",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPasswordDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u6960\u5c83\u7609\u942e\u4f78\u5f42\u95ab\u4f79\u579a\u9354\udc9f",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForgotPasswordResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf"
+                    },
+                    "404": {
+                        "description": "\u9422\u3126\u57db\u6d93\u5d85\u74e8\u9366\udca8"
+                    }
+                },
+                "summary": "\u9359\u6226\udc80\u4f78\u7611\u942e\u4f80\u5678\u7f03\udcae\u6960\u5c83\u7609\u942e\udc81",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/reset-password": {
+            "post": {
+                "description": "\u6d63\u8de8\u6564\u6960\u5c83\u7609\u942e\u4f80\u5678\u7f03\udcae\u9422\u3126\u57db\u7035\u55d9\u721c",
+                "operationId": "LoginController_resetPassword",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u7035\u55d9\u721c\u95b2\u5d87\u7586\u93b4\u612c\u59db",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CommonResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf\u93b4\u682d\u7359\u7487\u4f7a\u721c\u93c3\u72b3\u6665"
+                    },
+                    "404": {
+                        "description": "\u9422\u3126\u57db\u6d93\u5d85\u74e8\u9366\udca8"
+                    }
+                },
+                "summary": "\u95b2\u5d87\u7586\u7035\u55d9\u721c",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/change-password": {
+            "put": {
+                "description": "\u9422\u3126\u57db\u6dc7\udcae\u93c0\u7845\u569c\u5bb8\u8fa9\u6b91\u7035\u55d9\u721c\u951b\u5825\u6e36\u7455\u4f79\u5f41\u6e1a\u6d99\u68eb\u7035\u55d9\u721c\u951b\udc89",
+                "operationId": "LoginController_changePassword",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePasswordDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u7035\u55d9\u721c\u6dc7\udcae\u93c0\u89c4\u579a\u9354\udc9f",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CommonResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf\u93b4\u6828\u68eb\u7035\u55d9\u721c\u6d93\u5d86\udcad\uff47\u2018"
+                    },
+                    "404": {
+                        "description": "\u9422\u3126\u57db\u6d93\u5d85\u74e8\u9366\udca8"
+                    }
+                },
+                "summary": "\u6dc7\udcae\u93c0\u7470\u7611\u942e\udc81",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/send-email-verification": {
+            "post": {
+                "description": "\u935a\u621e\u5bda\u7039\u6c36\u5056\u7ee0\u535e\u5f42\u95ab\u4f80\u7359\u7487\u4f7a\u721c",
+                "operationId": "LoginController_sendEmailVerification",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendEmailVerificationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u6960\u5c83\u7609\u942e\u4f78\u5f42\u95ab\u4f79\u579a\u9354\udc9f",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForgotPasswordResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u7487\u950b\u7730\u9359\u509b\u669f\u95bf\u6b12\udcaf\udcaf"
+                    },
+                    "429": {
+                        "description": "\u9359\u6226\udc80\u4f80\udca2\u6220\u5dfc\u6769\u56ec\u73ee"
+                    }
+                },
+                "summary": "\u9359\u6226\udc80\u4f80\u5056\u7ee0\u904d\u7359\u7487\u4f7a\u721c",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/verify-email": {
+            "post": {
+                "description": "\u6d63\u8de8\u6564\u6960\u5c83\u7609\u942e\u4f80\u7359\u7487\u4f80\u5056\u7ee0\udcb1",
+                "operationId": "LoginController_verifyEmail",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmailVerificationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u95ad\udcae\u7ee0\u904d\u7359\u7487\u4f79\u579a\u9354\udc9f",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CommonResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u6960\u5c83\u7609\u942e\u4f80\u654a\u7487\udcaf\u93b4\u6827\u51e1\u6769\u56e8\u6e61"
+                    }
+                },
+                "summary": "\u6960\u5c83\u7609\u95ad\udcae\u7ee0\u904d\u7359\u7487\u4f7a\u721c",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/resend-email-verification": {
+            "post": {
+                "description": "\u95b2\u5d86\u67ca\u935a\u621e\u5bda\u7039\u6c36\u5056\u7ee0\u535e\u5f42\u95ab\u4f80\u7359\u7487\u4f7a\u721c",
+                "operationId": "LoginController_resendEmailVerification",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendEmailVerificationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "\u6960\u5c83\u7609\u942e\u4f80\u5678\u93c2\u677f\u5f42\u95ab\u4f79\u579a\u9354\udc9f",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForgotPasswordResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "\u95ad\udcae\u7ee0\u535e\u51e1\u6960\u5c83\u7609\u93b4\u682b\u6564\u93b4\u8702\u7b09\u701b\u6a3a\u6e6a"
+                    },
+                    "429": {
+                        "description": "\u9359\u6226\udc80\u4f80\udca2\u6220\u5dfc\u6769\u56ec\u73ee"
+                    }
+                },
+                "summary": "\u95b2\u5d86\u67ca\u9359\u6226\udc80\u4f80\u5056\u7ee0\u904d\u7359\u7487\u4f7a\u721c",
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/auth/debug-verification-code": {
+            "post": {
+                "description": "\u947e\u5cf0\u5f47\u6960\u5c83\u7609\u942e\u4f7a\u6b91\u7487\ufe3e\u7c8f\u748b\u51ad\u762f\u6dc7\u2103\u4f05\u951b\u581c\u7c8e\u5bee\udc80\u9359\u6220\u5e46\u6fa7\u51bf\u7d1a",
+                "operationId": "LoginController_debugVerificationCode",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendEmailVerificationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "\u748b\u51ad\u762f\u6960\u5c83\u7609\u942e\u4f77\u4fca\u93ad\udcaf",
+                "tags": [
+                    "auth"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Pixel Game Server API",
+        "description": "\u934d\u5fd5\u790c\u5a13\u544a\u5799\u93c8\u5d85\u59df\u9363\u02cbPI\u93c2\u56e8\u3002 - \u9356\u546d\u60c8\u9422\u3126\u57db\u7481\u3088\u7609\u9286\u4f7a\u6ae5\u8930\u66df\u655e\u9350\u5c80\u74d1\u9354\u71bb\u5158",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "auth",
+            "description": "\u9422\u3126\u57db\u7481\u3088\u7609\u9429\u7a3f\u53e7\u93ba\u30e5\u5f5b"
+        }
+    ],
+    "servers": [],
+    "components": {
+        "securitySchemes": {
+            "JWT-auth": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http",
+                "name": "JWT",
+                "description": "\u7487\u75af\u7ded\u934f\udca5JWT token",
+                "in": "header"
+            }
+        },
+        "schemas": {
+            "LoginDto": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "\u9427\u8bf2\u7d8d\u93cd\u56ea\u7611\u7ed7\ufe3c\u7d1d\u93c0\udcaf\u93b8\u4f7a\u6564\u93b4\u5cf0\u6095\u9286\u4f80\u5056\u7ee0\u8fa8\u57a8\u93b5\u5b2b\u6e80\u9359\udcb7",
+                        "example": "testuser",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57db\u7035\u55d9\u721c",
+                        "example": "password123",
+                        "minLength": 1,
+                        "maxLength": 128
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "password"
+                ]
+            },
+            "UserInfoDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57dbID",
+                        "example": "1"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57db\u935a\udc8d",
+                        "example": "testuser"
+                    },
+                    "nickname": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57db\u93c4\u7535\u041e",
+                        "example": "\u5a34\u5b2d\u762f\u9422\u3126\u57db"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u535e\u6e74\u9367\udc80",
+                        "example": "test@example.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "\u93b5\u5b2b\u6e80\u9359\u98ce\u721c",
+                        "example": "+8613800138000"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "description": "\u6fb6\u6751\u511aURL",
+                        "example": "https://example.com/avatar.jpg"
+                    },
+                    "role": {
+                        "type": "number",
+                        "description": "\u9422\u3126\u57db\u7459\u6395\u58ca",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "type": "string",
+                        "description": "\u9352\u6d98\u7f13\u93c3\u5815\u68ff",
+                        "example": "2025-12-17T10:00:00.000Z"
+                    }
+                },
+                "required": [
+                    "id",
+                    "username",
+                    "nickname",
+                    "role",
+                    "created_at"
+                ]
+            },
+            "LoginResponseDataDto": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "description": "\u9422\u3126\u57db\u6dc7\u2103\u4f05",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/UserInfoDto"
+                            }
+                        ]
+                    },
+                    "access_token": {
+                        "type": "string",
+                        "description": "\u7481\u5757\u68f6\u6d60\u3087\u589d",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "refresh_token": {
+                        "type": "string",
+                        "description": "\u9352\u950b\u67ca\u6d60\u3087\u589d",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "is_new_user": {
+                        "type": "boolean",
+                        "description": "\u93c4\udcaf\u935a\ufe3f\u8d1f\u93c2\u626e\u6564\u93b4\udcb7",
+                        "example": false
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "\u9427\u8bf2\u7d8d\u93b4\u612c\u59db"
+                    }
+                },
+                "required": [
+                    "user",
+                    "access_token",
+                    "message"
+                ]
+            },
+            "LoginResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "\u7487\u950b\u7730\u93c4\udcaf\u935a\ufe3d\u579a\u9354\udc9f",
+                        "example": true
+                    },
+                    "data": {
+                        "description": "\u935d\u5d85\u7c32\u93c1\u7248\u5d41",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LoginResponseDataDto"
+                            }
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "\u9427\u8bf2\u7d8d\u93b4\u612c\u59db"
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "\u95bf\u6b12\udcaf\udcaf\u6d60\uff47\u721c",
+                        "example": "LOGIN_FAILED"
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "RegisterDto": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57db\u935a\u5d8f\u7d1d\u9359\udcaa\u9473\u85c9\u5bd8\u935a\udcab\u701b\u6941\u761d\u9286\u4f79\u669f\u701b\u6940\u62f0\u6d93\u5b2a\u579d\u7efe\udcbf",
+                        "example": "testuser",
+                        "minLength": 1,
+                        "maxLength": 50,
+                        "pattern": "^[a-zA-Z0-9_]+$"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "\u7035\u55d9\u721c\u951b\u5c7d\u7e40\u6924\u8bf2\u5bd8\u935a\udcab\u701b\u6941\u761d\u935c\u5c7e\u669f\u701b\u694b\u7d1d\u95c0\u57ae\u5bb38-128\u701b\u6943\udcac\udca6",
+                        "example": "password123",
+                        "minLength": 8,
+                        "maxLength": 128
+                    },
+                    "nickname": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57db\u93c4\u7535\u041e",
+                        "example": "\u5a34\u5b2d\u762f\u9422\u3126\u57db",
+                        "minLength": 1,
+                        "maxLength": 50
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u535e\u6e74\u9367\udc80\u951b\u581d\u5f72\u95ab\u591b\u7d1a",
+                        "example": "test@example.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "\u93b5\u5b2b\u6e80\u9359\u98ce\u721c\u951b\u581d\u5f72\u95ab\u591b\u7d1a",
+                        "example": "+8613800138000"
+                    },
+                    "email_verification_code": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u904d\u7359\u7487\u4f7a\u721c\u951b\u5c7d\u7d8b\u93bb\u612a\u7df5\u95ad\udcae\u7ee0\u8fa8\u6902\u8e47\u546d\uff5e",
+                        "example": "123456",
+                        "pattern": "^\\d{6}$"
+                    }
+                },
+                "required": [
+                    "username",
+                    "password",
+                    "nickname"
+                ]
+            },
+            "RegisterResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "\u7487\u950b\u7730\u93c4\udcaf\u935a\ufe3d\u579a\u9354\udc9f",
+                        "example": true
+                    },
+                    "data": {
+                        "description": "\u935d\u5d85\u7c32\u93c1\u7248\u5d41",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LoginResponseDataDto"
+                            }
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "\u5a09\u3125\u553d\u93b4\u612c\u59db"
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "\u95bf\u6b12\udcaf\udcaf\u6d60\uff47\u721c",
+                        "example": "REGISTER_FAILED"
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "GitHubOAuthDto": {
+                "type": "object",
+                "properties": {
+                    "github_id": {
+                        "type": "string",
+                        "description": "GitHub\u9422\u3126\u57dbID",
+                        "example": "12345678",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "GitHub\u9422\u3126\u57db\u935a\udc8d",
+                        "example": "octocat",
+                        "minLength": 1,
+                        "maxLength": 50
+                    },
+                    "nickname": {
+                        "type": "string",
+                        "description": "GitHub\u93c4\u5267\u305a\u935a\u5d87\u041e",
+                        "example": "The Octocat",
+                        "minLength": 1,
+                        "maxLength": 50
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "GitHub\u95ad\udcae\u7ee0\u535e\u6e74\u9367\udc80\u951b\u581d\u5f72\u95ab\u591b\u7d1a",
+                        "example": "octocat@github.com"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "description": "GitHub\u6fb6\u6751\u511aURL\u951b\u581d\u5f72\u95ab\u591b\u7d1a",
+                        "example": "https://github.com/images/error/octocat_happy.gif"
+                    }
+                },
+                "required": [
+                    "github_id",
+                    "username",
+                    "nickname"
+                ]
+            },
+            "GitHubOAuthResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "\u7487\u950b\u7730\u93c4\udcaf\u935a\ufe3d\u579a\u9354\udc9f",
+                        "example": true
+                    },
+                    "data": {
+                        "description": "\u935d\u5d85\u7c32\u93c1\u7248\u5d41",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LoginResponseDataDto"
+                            }
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "GitHub\u9427\u8bf2\u7d8d\u93b4\u612c\u59db"
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "\u95bf\u6b12\udcaf\udcaf\u6d60\uff47\u721c",
+                        "example": "GITHUB_OAUTH_FAILED"
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "ForgotPasswordDto": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u8fa8\u57a8\u93b5\u5b2b\u6e80\u9359\udcb7",
+                        "example": "test@example.com",
+                        "minLength": 1,
+                        "maxLength": 100
+                    }
+                },
+                "required": [
+                    "identifier"
+                ]
+            },
+            "ForgotPasswordResponseDataDto": {
+                "type": "object",
+                "properties": {
+                    "verification_code": {
+                        "type": "string",
+                        "description": "\u6960\u5c83\u7609\u942e\u4f8a\u7d19\u6d60\u546f\u6564\u6d5c\u5ea2\u7d28\u7ec0\u7334\u7d1d\u7039\u70ba\u6aaf\u6434\u65c2\u6564\u6d93\udcad\u6d93\u5d85\u7c32\u6769\u65bf\u6d16\u951b\udc89",
+                        "example": "123456"
+                    }
+                }
+            },
+            "ForgotPasswordResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "\u7487\u950b\u7730\u93c4\udcaf\u935a\ufe3d\u579a\u9354\udc9f",
+                        "example": true
+                    },
+                    "data": {
+                        "description": "\u935d\u5d85\u7c32\u93c1\u7248\u5d41",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ForgotPasswordResponseDataDto"
+                            }
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "\u6960\u5c83\u7609\u942e\u4f78\u51e1\u9359\u6226\udc80\u4f8a\u7d1d\u7487\u950b\u7161\u93c0\udcb6"
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "\u95bf\u6b12\udcaf\udcaf\u6d60\uff47\u721c",
+                        "example": "SEND_CODE_FAILED"
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "ResetPasswordDto": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u8fa8\u57a8\u93b5\u5b2b\u6e80\u9359\udcb7",
+                        "example": "test@example.com",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "verification_code": {
+                        "type": "string",
+                        "description": "6\u6d63\u5d86\u669f\u701b\u6945\u7359\u7487\u4f7a\u721c",
+                        "example": "123456",
+                        "pattern": "^\\d{6}$"
+                    },
+                    "new_password": {
+                        "type": "string",
+                        "description": "\u93c2\u677f\u7611\u942e\u4f8a\u7d1d\u8e47\u5474\u300f\u9356\u546d\u60c8\u701b\u6941\u761d\u935c\u5c7e\u669f\u701b\u694b\u7d1d\u95c0\u57ae\u5bb38-128\u701b\u6943\udcac\udca6",
+                        "example": "newpassword123",
+                        "minLength": 8,
+                        "maxLength": 128
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "verification_code",
+                    "new_password"
+                ]
+            },
+            "CommonResponseDto": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "\u7487\u950b\u7730\u93c4\udcaf\u935a\ufe3d\u579a\u9354\udc9f",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "\u935d\u5d85\u7c32\u5a11\u581f\u4f05",
+                        "example": "\u93bf\u5d84\u7d94\u93b4\u612c\u59db"
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "\u95bf\u6b12\udcaf\udcaf\u6d60\uff47\u721c",
+                        "example": "OPERATION_FAILED"
+                    }
+                },
+                "required": [
+                    "success",
+                    "message"
+                ]
+            },
+            "ChangePasswordDto": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "description": "\u9422\u3126\u57dbID\u951b\u581d\u7584\u95c4\u546d\u7c32\u9422\u3124\u8151\u6434\u65be\u7ca0JWT\u6d60\u3087\u589d\u6d93\udcad\u947e\u5cf0\u5f47\u951b\udc89",
+                        "example": "1"
+                    },
+                    "old_password": {
+                        "type": "string",
+                        "description": "\u8930\u64b3\u58a0\u7035\u55d9\u721c",
+                        "example": "oldpassword123",
+                        "minLength": 1,
+                        "maxLength": 128
+                    },
+                    "new_password": {
+                        "type": "string",
+                        "description": "\u93c2\u677f\u7611\u942e\u4f8a\u7d1d\u8e47\u5474\u300f\u9356\u546d\u60c8\u701b\u6941\u761d\u935c\u5c7e\u669f\u701b\u694b\u7d1d\u95c0\u57ae\u5bb38-128\u701b\u6943\udcac\udca6",
+                        "example": "newpassword123",
+                        "minLength": 8,
+                        "maxLength": 128
+                    }
+                },
+                "required": [
+                    "user_id",
+                    "old_password",
+                    "new_password"
+                ]
+            },
+            "SendEmailVerificationDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u535e\u6e74\u9367\udc80",
+                        "example": "test@example.com"
+                    }
+                },
+                "required": [
+                    "email"
+                ]
+            },
+            "EmailVerificationDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "\u95ad\udcae\u7ee0\u535e\u6e74\u9367\udc80",
+                        "example": "test@example.com"
+                    },
+                    "verification_code": {
+                        "type": "string",
+                        "description": "6\u6d63\u5d86\u669f\u701b\u6945\u7359\u7487\u4f7a\u721c",
+                        "example": "123456",
+                        "pattern": "^\\d{6}$"
+                    }
+                },
+                "required": [
+                    "email",
+                    "verification_code"
+                ]
+            }
+        }
+    }
+}
